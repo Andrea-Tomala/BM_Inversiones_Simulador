@@ -1,0 +1,194 @@
+<div class="loading" *ngIf="spinner">
+  <mat-spinner color="#008D3C"></mat-spinner>
+  <div class="cargando">Cargando...</div>
+</div>
+<mat-toolbar style="background-color: white;">
+  <label>
+    <img src="assets/logo.png">
+  </label>
+</mat-toolbar>
+<hr style="background-color: gray; margin: 0 0 1em; height: 1px;">
+<br>
+<div class="container">
+  <div style="width: 98%; margin: auto;">
+    <h2 style="color:#008D3C; margin: 0 0 0px">BIENVENIDO A NUESTRO SIMULADOR DE DEPÓSITO A PLAZO</h2>
+    <hr style="border-color: #BD9A05; margin: 0 0 1em">
+    <div style="margin-top: 20px; padding: 0" class="container">
+      <div class="alert alert-inf mb-0" role="alert">
+        <div style="display: flex; align-items: center; color: #009845">
+          <mat-icon style="margin-right: 10px">error</mat-icon>
+          <span>{{ this.TITLE_PANEL[0] }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form [formGroup]="validateForm">
+    <mat-card style="width: 98%; margin: auto;">
+      <table style="width: 100%;">
+        <tr>
+          <td style="width: 5%"></td>
+          <td style="width: 40%">
+            <mat-form-field style="width: -webkit-fill-available;">
+              <input currencyMask matInput [options]="{align: 'left'}"
+                [placeholder]="monto > 0 ? 'MONTO A INVERTIR' : 'INGRESE MONTO A INVERTIR'" formControlName="monto"
+                (keyup)="vMonto($event)" (keypress)="onlyNumbers($event)"  (change)="calcularProyeccion=true;" autocomplete="off" >
+            </mat-form-field>
+            <div *ngIf="validateForm.get('monto')?.errors && validateForm.get('monto')?.touched">
+             
+              <mat-error style="font-size: small;" *ngIf="formValues.monto.errors?.serverError">
+                {{formValues.monto.errors?.serverError }}
+              </mat-error>
+            </div>
+          </td>
+          <td style="width: 5%"></td>
+          <td style="width: 5%"></td>
+          <td style="width: 40%">
+            <mat-form-field style="width: -webkit-fill-available;">
+              <input matInput [placeholder]="plazo > 0 ? 'PLAZO (DÍAS)' : 'INGRESE PLAZO (DÍAS)'" type="number"
+                formControlName="plazo" (change)="vPlazo($event)" (keypress)="onlyNumbers($event)">
+                <mat-hint *ngIf="plazoRecalculated && !validateForm.get('plazo')?.errors" layaout-align="start"><strong style="color: #BD9A05">Plazo recalculado para el siguiente día hábil de fecha de vencimiento.</strong></mat-hint>
+            </mat-form-field>
+            <div *ngIf="validateForm.get('plazo')?.errors && validateForm.get('plazo')?.touched">
+            
+              <mat-error style="font-size: small;" *ngIf="formValues.plazo.errors?.serverError">
+                {{formValues.plazo.errors?.serverError }}
+              </mat-error>
+            </div>
+          </td>
+          <td style="width: 5%"></td>
+        </tr>
+        <br>
+        <tr>
+          <td style="width: 5%"></td>
+          <td style="width: 40%">
+            <mat-form-field style="width: -webkit-fill-available;">
+              <input currencyMask matInput [options]="{align: 'left', suffix:'%', prefix:''}" placeholder="TASA"
+                formControlName="tasa" autocomplete="off" >
+            </mat-form-field>
+          </td>
+          <td style="width: 5%"></td>
+          <td style="width: 5%"></td>
+          <td style="width: 40%">
+            <mat-form-field style="width: -webkit-fill-available;">
+              <input currencyMask matInput [options]="{align: 'left'}" placeholder="INTERÉS A GANAR"
+                formControlName="interesGanar" [disabled]="true" autocomplete="off" >
+            </mat-form-field>
+          </td>
+          <td style="width: 5%"></td>
+        </tr>
+		<br>
+    <tr>
+      <td style="width: 5%"></td>
+      <td style="width: 40%">
+        <mat-form-field style="width: -webkit-fill-available;">
+          <input currencyMask matInput [options]="{align: 'left'}" placeholder="IMPUESTO" formControlName="impuesto"
+                 [disabled]="true" autocomplete="off">
+        </mat-form-field>
+      </td>
+      <td style="width: 5%">
+     <div class="alert-inf1" role="alert" style="color: #ffffff">
+       <mat-icon style="margin-right: 10px ">info</mat-icon>
+     </div>
+   </td>
+    
+      <td style="width: 5%"></td>
+      <td style="width: 40%">
+        <mat-form-field style="width: -webkit-fill-available;">
+          <input currencyMask matInput [options]="{align: 'left'}" placeholder="INTERÉS A RECIBIR"
+                 formControlName="interesRecibir" [disabled]="true" autocomplete="off">
+        </mat-form-field>
+      </td>
+      <td style="width: 5%"></td>
+    </tr>
+		<br>
+        <tr>
+          <td style="width: 5%"></td>
+          <td style="width: 40%">
+            <mat-form-field style="width: -webkit-fill-available;">
+              <input currencyMask matInput [options]="{align: 'left'}" placeholder="TOTAL A RECIBIR"
+                formControlName="total" [disabled]="true" autocomplete="off" >
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+
+      <!--   <div style="width: 85%; margin: auto;"> -->
+      <div id="proyeccionInversions" *ngIf="hideProyeccion">
+
+        <p style="color:#008D3C;"><strong>Otras opciones para su inversión:</strong></p>
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 proyeccion">
+              <br>
+              <p>PLAZO</p>
+              <p id="labelTasa">TASA</p>
+              <p id="labelInteresGanar">INTERÉS A GANAR</p>
+              <p>IMPUESTO</p>
+              <p id="labelInteresRecibir"style="color: #008D3C">INTERÉS A RECIBIR</p>
+            </div>
+
+            <div class="col fixed-sn row">
+              <div class="col-1">
+                <div class="controls-top">
+                  <a class="carousel-control-prev text-dark" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  </a>
+                </div>
+              </div>
+
+              <div class="col fixed-sn">
+                <mat-radio-group>
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false" >
+                      <div class="carousel-inner">
+                        <div class="carousel-item" *ngFor="let item of slides; let i = index" [ngClass]="{'active': i == 0 }">
+                          <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-xl-2" *ngFor="let proy of item; let proyIndex = index" style="display: inline-block;">
+                            <!-- <mat-radio-button value="{{proy.plazo}}" (change)="radioChange($event)"></mat-radio-button> -->
+                            <div class="mat-card" style="padding: 10px;">
+                              <mat-card style="max-width: 300px; display:contents">
+                                <mat-card-content>
+                                  <p class="borderTopBottom"><strong>{{proy.plazo}} DÍAS</strong></p>
+                                  <p style="text-align: right">{{getTwoDecimalNumber(proy.tasa)}}%</p>
+                                  <br *ngIf="flagProyeccionesSaltoIGanar"/>
+                                  <p style="text-align: right">$ {{getTwoDecimalNumber(proy.interesGanar)}}</p>
+                                  <p style="text-align: right">$ {{getTwoDecimalNumber(proy.impuesto)}}</p>
+                                  <br *ngIf="flagProyeccionesSaltoIRecibir"/>
+                                  <p class="borderBottomGray" style="color: #008D3C; text-align: right">$ {{getTwoDecimalNumber(proy.interesRecibir)}}</p>
+                                </mat-card-content>
+                              </mat-card>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </mat-radio-group>
+                </div>
+
+              <div class="col-1">
+                <a class="carousel-control-next text-dark" href="#myCarousel" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </a>
+              </div>
+              </div>
+            </div>
+          </div>
+        <!-- </div> -->
+      </div>
+    </mat-card>
+  </form>
+
+  <br>
+
+  <div style="text-align: right; margin-right: 5%; margin-bottom:60px;">
+    <button mat-button [disabled]="!boton || validateForm.invalid" type="submit" class="btn btn-primary" style="color: white;"
+      (click)="siguiente()">Desea Invertir
+      <i class="fas fa-arrow-right" style="color: white;"></i></button>
+  </div>
+<br />
+
+
+</div>
+
+<div class="footer py-3">
+  <p class="text-left">Banco de Machala © 2021. Todos los derechos reservados.<a style="float: right; color: white">Contact Center: 392 04 04</a></p>
+</div>

@@ -1,0 +1,287 @@
+@import "~@angular/material/theming";
+@include mat-core();
+
+$mm-green: (
+  50: #f2f9eb,
+  100: #def0cc,
+  200: #c9e7aa,
+  300: #b3dd88,
+  400: #a2d56f,
+  500: #92ce55,
+  600: #8ac94e,
+  700: #7fc244,
+  800: #75bc3b,
+  900: #009845,
+  A100: #f7fff1,
+  A200: #d8ffbe,
+  A400: #b9ff8b,
+  A700: #aaff72,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$mm-gold: (
+  50: #f8f2e4,
+  100: #efdfba,
+  200: #e4ca8d,
+  300: #d9b55f,
+  400: #d0a53c,
+  500: #c8951a,
+  600: #c28d17,
+  700: #bb8213,
+  800: #b4780f,
+  900: #a76708,
+  A100: #ffebd3,
+  A200: #ffd4a0,
+  A400: #ffbd6d,
+  A700: #ffb253,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$mm-red: (
+  50: #e5f4f3,
+  100: #bee4e1,
+  200: #93d3cd,
+  300: #67c1b8,
+  400: #47b3a9,
+  500: #26a69a,
+  600: #229e92,
+  700: #1c9588,
+  800: #178b7e,
+  900: #920808,
+  A100: #0e0f0f,
+  A200: #7affec,
+  A400: #47ffe4,
+  A700: #2dffe0,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$candy-app-primary: mat-palette($mm-green, 900);
+$candy-app-accent: mat-palette($mm-gold);
+$candy-app-warn: mat-palette($mm-red, 900);
+
+$candy-app-theme: mat-light-theme(
+  $candy-app-primary,
+  $candy-app-accent,
+  $candy-app-warn
+);
+
+@include angular-material-theme($candy-app-theme);
+
+$theme-colors: (
+  "primary": #009845,
+  "secondary": #a76708,
+  "success": #009845,
+  "danger": #920808,
+  "C": #a76708,
+  "info": #e7e3e2,
+  "infod": #707070,
+);
+@import "node_modules/bootstrap/scss/bootstrap.scss";
+
+@font-face {
+  src: url("font/Novecento-LightWide.otf");
+  font-family: "NovacentoLightWide";
+  font-style: normal;
+}
+
+.machala-title {
+  font-family: "NovacentoLightWide" !important;
+}
+
+.alert-login {
+  background-color: #c8951a;
+  color: #fff;
+}
+
+.alert-inf1 {
+  background-color: #ffffff;
+  color: #009845;
+}
+
+/* .alert.alert-inf1 {
+  background-color: #ffffff ;
+  color: var(--primary) ;
+}
+.alert-inf {
+  color: var(--primary) !important;
+} */
+.invisible {
+  display: block;
+  visibility: hidden;
+  height: 0;
+  width: 0;
+}
+
+.cdk-global-overlay-wrapper {
+  display: flex;
+  position: absolute;
+  z-index: 1000;
+  overflow: auto;
+  pointer-events: auto;
+}
+
+@media only screen and (min-width: 768px) {
+  .footerBtnClass {
+    text-align: right;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .footerBtnClass {
+    text-align: center;
+  }
+}
+
+.check-error {
+  color: #920808 !important;
+}
+
+.map img {
+  vertical-align: middle;
+}
+.primaryColor {
+  color: #009845;
+}
+.buttonStyle {
+  text-transform: uppercase;
+  background-color: #009845;
+  border-radius: 0px;
+  cursor: pointer;
+}
+.textCenterMobile {
+  text-align: left !important;
+}
+@media only screen and (max-width: 768px) {
+  .textCenterMobile {
+    text-align: left !important;
+  }
+}
+.contentTab {
+  width: 80% !important;
+  margin-top: 25px;
+}
+@media only screen and (max-width: 768px) {
+  .contentTab {
+    width: 100% !important;
+  }
+}
+
+.mat-checkbox-inner-container {
+  transform: scale(1.3);
+  box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2) !important;
+}
+
+app-validacion > .container,
+app-validacion > .container .container {
+  max-width: unset !important;
+}
+
+app-simulacion > .container,
+app-simulacion > .container .container {
+  max-width: unset !important;
+}
+
+.btn-primary.disabled, .btn-primary:disabled, .btn-primary[disabled]{
+  background-color: var(--infod) !important;
+  border-color: var(--infod) !important;
+}
+
+// Campo de formulario sin valor
+.mat-form-field .mat-form-field-underline {
+  background-image: linear-gradient(to right, var(--primary) 100%, var(--primary) 100%, transparent 0%) !important;
+}
+.mat-form-field .mat-form-field-label {
+  color: var(--primary) !important;
+}
+.mat-form-field .mat-form-field-underline > .mat-form-field-ripple {
+  background-color: var(--primary) !important;
+}
+
+// Campo de formulario sin valor
+.mat-form-field.ng-untouched .mat-form-field-underline,
+.mat-form-field.ng-untouched.mat-form-field-invalid .mat-form-field-underline,
+.mat-form-field.ng-untouched.mat-form-field-invalid.mat-focused .mat-form-field-underline {
+  background-image: linear-gradient(to right, var(--infod) 100%, var(--infod) 100%, transparent 0%) !important;
+}
+.mat-form-field.ng-untouched .mat-form-field-label {
+  color: var(--infod) !important;
+}
+.mat-form-field.ng-untouched .mat-form-field-underline > .mat-form-field-ripple,
+.mat-form-field.ng-untouched.mat-form-field-invalid .mat-form-field-underline > .mat-form-field-ripple,
+.mat-form-field.ng-untouched.mat-form-field-invalid.mat-focused .mat-form-field-underline > .mat-form-field-ripple {
+  background-color: var(--infod) !important;
+}
+
+// Campo de formulario con error
+.mat-form-field.mat-form-field-invalid.ng-touched .mat-form-field-underline {
+  background-image: linear-gradient(to right, var(--danger) 100%, var(--danger) 100%, transparent 0%) !important;
+}
+.mat-form-field.mat-form-field-invalid.ng-touched .mat-form-field-label {
+  color: var(--danger) !important;
+}
+.mat-form-field.mat-form-field-invalid.ng-touched .mat-form-field-underline > .mat-form-field-ripple {
+  background-color: var(--danger) !important;
+}
+
+.mat-error.ng-star-inserted {
+  margin-top: -1em !important;
+}
+
+.mat-ink-bar{
+  height: 2px !important;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #008D3C;
+  color: white;
+  text-align: center;
+}

@@ -1,0 +1,16 @@
+.subtitulo{
+    color: #008D3C;
+    background-color: gainsboro;
+}
+
+button:not(:disabled),[type="submit"]:not(:disabled) {
+    //cursor: pointer;
+    //background-color: #008D3C;
+    color: #008D3C;
+}
+
+/* .mat-button.mat-button-disabled.mat-button-disabled{
+    color: gray;
+    background-color: lightgray;
+} */
+

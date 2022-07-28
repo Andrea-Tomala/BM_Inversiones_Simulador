@@ -1,0 +1,82 @@
+button:not(:disabled),[type="submit"]:not(:disabled) {
+    //cursor: pointer;
+    background-color: #008D3C;
+    color: white;
+}
+
+.alert.alert-inf {
+  background-color: #e5e5e5 ;
+  color: var(--primary) ;
+}
+.alert-inf {
+  color: var(--primary) !important;
+}
+
+table {
+    width: 100%;
+    }
+
+.proyeccion {
+    text-align: right;
+}
+
+.loading{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.7;
+    background-color: #fff;
+    z-index: 99;
+}
+.cargando {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+/* .carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 100px;
+  width: 100px;
+  outline: black;
+  background-size: 100%, 100%;
+  border-radius: 50%;
+  border: 1px solid black;
+  background-image: none;
+} */
+
+.carousel-control-next-icon:after
+{
+  content: '>';
+  font-size: 55px;
+  color: #82C341;
+}
+
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 55px;
+  color: #82C341;
+}
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: green !important;
+ }
+  
+ ::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: green !important;
+ }
+   //::ng-deep .mat-form-field-empty.mat-form-field-label { color: green;}
+   .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    color: #008D3C;
+}
