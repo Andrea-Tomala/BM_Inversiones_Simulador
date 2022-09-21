@@ -6,6 +6,7 @@ export class RendimientoCalculoInversionReqModel {
   IPlazo: number;
   Identificacion: string;
   ITipoIdentificacion: string;
+  PagoInt: string;
 
   clear() {
     this.Auditoria = new AuditoriaModel();
@@ -13,5 +14,6 @@ export class RendimientoCalculoInversionReqModel {
     this.IPlazo = 0;
     this.Identificacion = '';
     this.ITipoIdentificacion = '';
+    this.PagoInt = '';
   }
 }

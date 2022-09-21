@@ -7,5 +7,6 @@
         public decimal IPlazo { get; set; }
         public string Identificacion { get; set; }
         public string ITipoIdentificacion { get; set; }
+        public string PagoInt {get; set;}
     }
 }

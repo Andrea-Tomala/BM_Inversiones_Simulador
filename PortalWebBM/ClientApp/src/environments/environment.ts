@@ -100,4 +100,17 @@ export const environment = {
     return valor;
   },
 
+  getMensualInteres() {
+    let valor: string = AppConfiguration.Setting().mensualInteres;
+    return valor;
+  },
+  getParametroInteresVencimiento() {
+    let valor: string = AppConfiguration.Setting().parametroInteresVencimiento;
+    return valor;
+  },
+  getIdCatalogoVencimiento() {
+    let valor: string = AppConfiguration.Setting().parametroCatalogoVencim;
+    return valor;
+  }
+
 };

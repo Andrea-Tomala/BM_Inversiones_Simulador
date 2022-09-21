@@ -29,6 +29,9 @@ export class AppComponent {
   public mensaje_LimitePlazoMin: string;
   public mensaje_LimiteMonto: string;
   public mensaje_minLimiteMonto: string;
+  public ID_CATALOGO_PAGO_MENSUAL: string;
+  public pagoInteres_vencimiento: string;
+  public idCatalogoVencim: string;
   public MensajePopup: string = "Hemos validado su información, para realizar la contratación del Depósito a plazo en línea haga click en el siguiente botón.";
   constructor(
     public dialog: MatDialog,
@@ -96,6 +99,15 @@ export class AppComponent {
       let mensajePopup = this.obtenerParametro(environment.getMensajePopUp());
       this.MensajePopup = mensajePopup == "" ? "Hemos validado su información, para realizar la contratación del Depósito a plazo en línea haga click en el siguiente botón." : String(mensajePopup);
       localStorage.setItem('params', this.MensajePopup);
+
+      let mensualInteres = this.obtenerParametro(environment.getMensualInteres());
+      this.ID_CATALOGO_PAGO_MENSUAL = mensualInteres == "" ? this.ParametrosInversiones.find(p => p.nombreParametro == "ID_CATALOGO_PAGO_MENSUAL")?.valor ?? "ID_CATALOGO_PAGO_MENSUAL" : String(mensualInteres);
+
+      let parametroInteresVencimiento = this.obtenerParametro(environment.getParametroInteresVencimiento());
+      this.pagoInteres_vencimiento = parametroInteresVencimiento == "" ? this.ParametrosInversiones.find(p => p.nombreParametro == "V")?.valor ?? "V" : Number(parametroInteresVencimiento);
+
+      let parametroCatalogoVencim = this.obtenerParametro(environment.getIdCatalogoVencimiento());
+      this.idCatalogoVencim = parametroCatalogoVencim == "" ? this.ParametrosInversiones.find(p => p.nombreParametro == "ID_CATALOGO_PAGO_VENCIM")?.valor ?? "ID_CATALOGO_PAGO_VENCIM" : String(parametroCatalogoVencim);
     },
     error => {
      

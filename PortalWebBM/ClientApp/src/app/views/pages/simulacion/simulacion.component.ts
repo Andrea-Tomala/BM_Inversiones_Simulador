@@ -245,6 +245,7 @@ export class SimulacionComponent implements OnInit {
     rpRequest.IPlazo = Number(this.plazo);
     rpRequest.Identificacion = this.father.SIM_IDENTIFICACION_VALUE;
     rpRequest.ITipoIdentificacion = this.father.SIM_TIPO_IDENTIFICACION_VALUE;
+    rpRequest.PagoInt = String(this.father.idCatalogoVencim);
     rpRequest.Auditoria = new AuditoriaModel();
     rpRequest.Auditoria.Cliente = "SimuladorInversiones";
     rpRequest.Auditoria.NutOrigen = "none";
